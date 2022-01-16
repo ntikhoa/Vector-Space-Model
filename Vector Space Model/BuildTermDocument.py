@@ -12,6 +12,11 @@ cachedWords = []
 # Load index.txt first and save into docTermMatrix variable
 # If the file does not exist, build the docTermMatrix
 # convert the docTermMatrix into json and save it in index.txt
+
+# Currently indexing for 2000 documents
+# If you want to indexing for more documents, simply remove (or delete) index.txt file
+# Go to ScanDir.py and change the variable totalFiles
+
 if os.path.exists('./index.txt'):
     fromJson = open("./index.txt", "r", encoding="utf-16").read()
     docTermMatrix = json.loads(fromJson)
