@@ -1,0 +1,4 @@
+vietnamese stop word:
+https://www.jsdelivr.com/package/npm/vietnamese-stopwords
+OR
+https://github.com/stopwords/vietnamese-stopwords (this is shit)
