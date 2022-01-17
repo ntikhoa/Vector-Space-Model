@@ -24,7 +24,7 @@ class Main_GUI(object):
         font.setPointSize(11)
         self.query_input.setFont(font)
         self.query_input.setObjectName("query_input")
-        self.result_view = QtWidgets.QListView(Dialog)
+        self.result_view = QtWidgets.QListWidget(Dialog)
         self.result_view.setGeometry(QtCore.QRect(10, 50, 671, 511))
         self.result_view.setObjectName("result_view")
 

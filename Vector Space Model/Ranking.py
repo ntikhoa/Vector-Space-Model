@@ -14,41 +14,46 @@ import math
 # print(index * 3, len(docTermMatrix))
 
 # suggestion query: pc ps4 ps5
-query = input("Enter query: ")
-query = processQuery(query)
+# query = input("Enter query: ")
 
-queryVector = []
-for k in docTermMatrix:
-    if (k in query):
-        queryVector.append(1)
-    else:
-        queryVector.append(0)
 
-queryVector = np.asarray(queryVector)
-unitQueryVector = queryVector / np.linalg.norm(queryVector)
+def ranking_return(query):
+    query = processQuery(query)
 
-ranking = []
-
-for i in range(totalFiles):
-    file = onlyFiles[i]
-    docVector = []
+    queryVector = []
     for k in docTermMatrix:
-        if file in docTermMatrix[k]:
-            docVector.append(docTermMatrix[k][file])
+        if (k in query):
+            queryVector.append(1)
         else:
-            docVector.append(0)
+            queryVector.append(0)
 
-    docVector = np.asarray(docVector)
-    unitDocVector = docVector / np.linalg.norm(docVector)
-    dot_product = np.dot(unitDocVector, docVector)
-    angle = np.arccos(dot_product)
-    if (math.isnan(angle)):
-        angle = 0
-    ranking.append((file, angle))
+    queryVector = np.asarray(queryVector)
+    unitQueryVector = queryVector / np.linalg.norm(queryVector)
 
-for i in range(len(ranking)):
-    for j in range(i + 1, len(ranking)):
-        if (ranking[j][1] > ranking[i][1]):
-            temp = ranking[j]
-            ranking[j] = ranking[i]
-            ranking[i] = temp
+    ranking = []
+
+    for i in range(totalFiles):
+        file = onlyFiles[i]
+        docVector = []
+        for k in docTermMatrix:
+            if file in docTermMatrix[k]:
+                docVector.append(docTermMatrix[k][file])
+            else:
+                docVector.append(0)
+
+        docVector = np.asarray(docVector)
+        unitDocVector = docVector / np.linalg.norm(docVector)
+        dot_product = np.dot(unitDocVector, docVector)
+        angle = np.arccos(dot_product)
+        if (math.isnan(angle)):
+            angle = 0
+        ranking.append((file, angle))
+
+    for i in range(len(ranking)):
+        for j in range(i + 1, len(ranking)):
+            if (ranking[j][1] > ranking[i][1]):
+                temp = ranking[j]
+                ranking[j] = ranking[i]
+                ranking[i] = temp
+
+    return ranking
