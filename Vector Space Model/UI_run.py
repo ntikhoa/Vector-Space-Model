@@ -1,7 +1,8 @@
+import os
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 from gui import *
-# from Ranking import *
+from Ranking import *
 
 
 class ProjectUI(QMainWindow, Main_GUI):
@@ -13,14 +14,13 @@ class ProjectUI(QMainWindow, Main_GUI):
 
     # Populate list with data
     def populate_list(self, query):
-        # data = ranking_return(query)[:20]
-        data = "abc"
+        data = ranking_return(query)[:20]
         for index in range(len(data)):
-            self.result_view.addItem(data[index])
+            self.result_view.addItem(data[index][0])
 
     # open document
     def on_item_double_clicked(self, item):
-        pass
+        os.startfile(os.path.join(os.getcwd() + '\\news_dataset\\' + item.text()))
 
     # on search button click
     def on_button_clicked(self):

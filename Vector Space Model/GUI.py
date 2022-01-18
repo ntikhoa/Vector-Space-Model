@@ -13,8 +13,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Main_GUI(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(694, 577)
+        Dialog.setObjectName("Text Retrieval")
+        Dialog.setFixedSize(694, 577)
         self.search_btn = QtWidgets.QPushButton(Dialog)
         self.search_btn.setGeometry(QtCore.QRect(570, 10, 111, 31))
         self.search_btn.setObjectName("search_btn")
@@ -24,6 +24,7 @@ class Main_GUI(object):
         font.setPointSize(11)
         self.query_input.setFont(font)
         self.query_input.setObjectName("query_input")
+        self.query_input.setPlaceholderText("Enter your query")
         self.result_view = QtWidgets.QListWidget(Dialog)
         self.result_view.setGeometry(QtCore.QRect(10, 50, 671, 511))
         self.result_view.setObjectName("result_view")
@@ -33,8 +34,8 @@ class Main_GUI(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.search_btn.setText(_translate("Dialog", "Search"))
+        Dialog.setWindowTitle(_translate("Text Retrieval", "Text Retrieval"))
+        self.search_btn.setText(_translate("Text Retrieval", "Search"))
 
 
 if __name__ == "__main__":
