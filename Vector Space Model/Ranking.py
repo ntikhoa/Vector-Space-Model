@@ -4,6 +4,7 @@ from ScanDir import totalFiles, onlyFiles
 import numpy as np
 import math
 
+
 # for multithreading maybe in the future
 # print(len(onlyFiles))
 # index = int(len(docTermMatrix) / 4)
@@ -43,15 +44,14 @@ def ranking_return(query):
 
         docVector = np.asarray(docVector)
         unitDocVector = docVector / np.linalg.norm(docVector)
-        dot_product = np.dot(unitDocVector, docVector)
+        dot_product = np.dot(unitDocVector, unitQueryVector)
         angle = np.arccos(dot_product)
-        if (math.isnan(angle)):
-            angle = 0
-        ranking.append((file, angle))
+        if (not math.isnan(angle)):
+            ranking.append((file, angle))
 
     for i in range(len(ranking)):
         for j in range(i + 1, len(ranking)):
-            if (ranking[j][1] > ranking[i][1]):
+            if (ranking[j][1] < ranking[i][1]):
                 temp = ranking[j]
                 ranking[j] = ranking[i]
                 ranking[i] = temp
